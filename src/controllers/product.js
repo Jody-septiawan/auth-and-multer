@@ -1,4 +1,4 @@
-const { product, user, category, productCategory } = require("../../models");
+const { product, user, category, productCategory } = require('../../models');
 
 exports.getProduct = async (req, res) => {
   try {
@@ -6,38 +6,38 @@ exports.getProduct = async (req, res) => {
       include: [
         {
           model: user,
-          as: "user",
+          as: 'user',
           attributes: {
-            exclude: ["createdAt", "updatedAt", "password"],
+            exclude: ['createdAt', 'updatedAt', 'password'],
           },
         },
         {
           model: category,
-          as: "categories",
+          as: 'categories',
           through: {
             model: productCategory,
-            as: "bridge",
+            as: 'bridge',
             attributes: [],
           },
           attributes: {
-            exclude: ["createdAt", "updatedAt"],
+            exclude: ['createdAt', 'updatedAt'],
           },
         },
       ],
       attributes: {
-        exclude: ["createdAt", "updatedAt", "idUser"],
+        exclude: ['createdAt', 'updatedAt', 'idUser'],
       },
     });
 
     res.send({
-      status: "success...",
+      status: 'success...',
       data,
     });
   } catch (error) {
     console.log(error);
     res.send({
-      status: "failed",
-      message: "Server Error",
+      status: 'failed',
+      message: 'Server Error',
     });
   }
 };
@@ -71,37 +71,37 @@ exports.addProduct = async (req, res) => {
       include: [
         {
           model: user,
-          as: "user",
+          as: 'user',
           attributes: {
-            exclude: ["createdAt", "updatedAt", "password"],
+            exclude: ['createdAt', 'updatedAt', 'password'],
           },
         },
         {
           model: category,
-          as: "categories",
+          as: 'categories',
           through: {
             model: productCategory,
-            as: "bridge",
+            as: 'bridge',
             attributes: [],
           },
           attributes: {
-            exclude: ["createdAt", "updatedAt"],
+            exclude: ['createdAt', 'updatedAt'],
           },
         },
       ],
       attributes: {
-        exclude: ["createdAt", "updatedAt", "idUser"],
+        exclude: ['createdAt', 'updatedAt', 'idUser'],
       },
     });
     res.send({
-      status: "success...",
+      status: 'success...',
       data: productData,
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
-      status: "failed",
-      message: "Server Error",
+      status: 'failed',
+      message: 'Server Error',
     });
   }
 };
